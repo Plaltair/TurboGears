@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>Contatti</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark justify-content-between" style="background-color: #0BAB64;">
+        <div>
+            <a class="navbar-brand" href="/contacts">Contacts: ${request.identity["repoze.who.userid"]}</a>
+            <a href="/contacts_json"><button class="btn btn-dark">Esporta in JSON</button></a>
+        </div>
+        <a href="/logout_handler"><button class="btn btn-danger">Logout</button></a>
+    </nav>
+
+    <table class="table">
+        <thead class="thead-dark" align="center">
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Modifica</th>
+            <th scope="col">Elimina</th>
+        </tr>
+        </thead>
+        <tbody align="center">
+            <tr py:for="contact in contacts">
+                <td>${contact.name}</td>
+                <td>${contact.number}</td>
+                <td>
+                    <form action="/modify_contact/" method="post">
+                        <input type="hidden" name="id" value="${contact.id}"/>
+                        <input type="hidden" name="name" value="${contact.name}"/>
+                        <input type="hidden" name="number" value="${contact.number}"/>
+                        <button class="btn btn-primary" type="submit">Modifica</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/delete_contact/" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare il contatto?');">
+                        <input type="hidden" name="id" value="${contact.id}"/>
+                        <button class="btn btn-danger" type="submit">Elimina</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <div align="center">
+        <a href="/add_contact"><button class="btn btn-success">Aggiungi contatto</button></a>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

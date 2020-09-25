@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>Login</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/style.css')}" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark justify-content-between" style="background-color: #0BAB64;">
+        <div>
+            <a class="navbar-brand" href="/contacts">Contacts</a>
+        </div>
+        <a href="/registration"><button class="btn btn-primary">Registrati</button></a>
+    </nav>
+    <br/>
+    <div class="container">
+        <py:with vars="flash=tg.flash_obj.render('flash', use_js=False)">
+            <div align="center">
+                <div py:if="flash" py:replace="Markup(flash)" />
+            </div>
+        </py:with>
+    </div>
+    <div class="container">
+        <br></br><h1 align="center">Login</h1><br></br>
+        <form action="/login_handler" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="login" value="${login}"/>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password" />
+            </div>
+            <div class="form-group">
+                <p>Ricordami <input type="checkbox" name="remember" value="2252000" /></p>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary">Accedi</button>
+        </form>
+    </div>
+</body>
+</html>
